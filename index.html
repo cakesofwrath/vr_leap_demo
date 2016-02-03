@@ -38,6 +38,10 @@
 	</body>
 
 <script>
+  // https://developer.leapmotion.com/gallery/vr-quickstart
+  // https://gist.github.com/pehrlich/75f26a54a2f4a46cbb0c
+  // https://github.com/leapmotion-examples/javascript/tree/master/v2
+
   // Including this in the footer so that the bone hand plugin can create its canvas on the body
 
   //
@@ -65,6 +69,7 @@
   });
 
   renderer.setSize(window.innerWidth, window.innerHeight);
+  renderer.setClearColor(0xffffff, 1);
 
   onResize = function() {
     camera.aspect = window.innerWidth / window.innerHeight;
@@ -73,9 +78,10 @@
   };
   window.addEventListener('resize', onResize, false);
 
-  var geometry = new THREE.BoxGeometry(1, 1, 1);
+  var geometry = new THREE.BoxGeometry(2, 8, 2);
   var material = new THREE.MeshBasicMaterial({color: 0x00ff00})
   var cube = new THREE.Mesh(geometry, material);
+  cube.position.set(-5, 0, 0);
   scene.add(cube);
 
   camera.position.z = 5;
