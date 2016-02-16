@@ -89,7 +89,7 @@ var boneHand = Leap.loopController.plugins.boneHand,
     renderer = boneHand.renderer,
     scene = boneHand.scene,
     camera = boneHand.camera;
-
+console.log(boneHand);
 transform.effectiveParent = camera;
 
 // Moves (translates and rotates) the camera
@@ -162,7 +162,7 @@ Leap.loopController.on("frame", function(frame) {
     sphere.position.fromArray(hand.palmPosition);;
 });
 
-boneHand.render = function() {
+var render = function() {
     if(!sphere.pinched) {
         var newPos = (new THREE.Vector3).subVectors(sphere.position, sphere.lastPosition);
 
@@ -178,8 +178,10 @@ boneHand.render = function() {
 
     vrControls.update();
     vrEffect.render(scene, camera);
+    requestAnimationFrame(render);
 }
 
+render();
 
 //
 // MAKE IT GO
