@@ -115,7 +115,7 @@ var onkey = function(event) {
 window.addEventListener("keypress", onkey, true);
 
 var sphere = new THREE.Mesh(
-    new THREE.SphereGeometry(1, 20, 20),
+    new THREE.SphereGeometry(0.09, 20, 20),
     new THREE.MeshPhongMaterial({
         color: 0xe6e6e6,
         specular: 0xe6e6e6
@@ -124,7 +124,7 @@ var sphere = new THREE.Mesh(
 sphere.position.set(0, -0.1, -0.39);
 // spheres.push(sphere);
 scene.add(sphere);
-sphere.visible = true;
+/*sphere.visible = true;
 
 sphere.lastPosition = sphere.position.clone();
 sphere.pinched = false;
@@ -157,7 +157,7 @@ Leap.loopController.on("frame", function(frame) {
     sphere.pinched = false;
     sphere.lastPosition = sphere.position.clone();
     sphere.position.fromArray(hand.palmPosition);;
-});
+});*/
 
 var render = function() {
     if(!sphere.pinched) {
