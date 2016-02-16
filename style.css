@@ -1,0 +1,10 @@
+body {
+    font-family: Monospace;
+    margin: 0px;
+    padding: 0;
+}
+canvas.leap-boneHand {
+    top: 0;
+    left: 0;
+    position: absolute;
+}

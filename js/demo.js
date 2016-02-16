@@ -115,7 +115,7 @@ var onkey = function(event) {
 window.addEventListener("keypress", onkey, true);
 
 var sphere = new THREE.Mesh(
-    new THREE.SphereGeometry(0.03, 20, 20),
+    new THREE.SphereGeometry(1, 20, 20),
     new THREE.MeshPhongMaterial({
         color: 0xe6e6e6,
         specular: 0xe6e6e6
@@ -130,13 +130,10 @@ sphere.lastPosition = sphere.position.clone();
 sphere.pinched = false;
 sphere.tmpPosition = new THREE.Vector3;
 
-var plotter = new LeapDataPlotter();
-
 Leap.loopController.on("frame", function(frame) {
     var hand = frame.hands[0];
 
     if(!hand) return;
-    plotter.plot('pinchStr', hand.pinchStrength)
 }).on("pinch", function(hand) {
     sphere.visible = true;
     sphere.pinched = true;
@@ -167,14 +164,13 @@ var render = function() {
         var newPos = (new THREE.Vector3).subVectors(sphere.position, sphere.lastPosition);
 
         newPos.multiplyScalar(0.96);
-        newPos.y -= 0.0005;
+        // newPos.y -= 0.0005;
 
         newPos.add(sphere.position);
 
         sphere.lastPosition = sphere.position.clone();
         sphere.position.copy(newPos);
     }
-    plotter.update();
 
     vrControls.update();
     vrEffect.render(scene, camera);
