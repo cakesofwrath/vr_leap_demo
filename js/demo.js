@@ -9,7 +9,7 @@
 //
 //
 
-/*var scene = new THREE.Scene();
+var scene = new THREE.Scene();
 
 var camera = new THREE.PerspectiveCamera(
   75,
@@ -38,13 +38,13 @@ onResize = function() {
 };
 window.addEventListener("resize", onResize, false);
 
-var geometry = new THREE.BoxGeometry(2, 8, 2);
+/*var geometry = new THREE.BoxGeometry(2, 8, 2);
 var material = new THREE.MeshBasicMaterial({color: 0x00ff00})
 var cube = new THREE.Mesh(geometry, material);
 cube.position.set(-5, 0, 0);
-scene.add(cube);
+scene.add(cube);*/
 
-camera.position.z = 5;*/
+camera.position.z = 5;
 // Connect to localhost and start getting frames
 Leap.loop();
 
@@ -52,12 +52,12 @@ Leap.loop();
 Leap.loopController.use('transform', {
 
   // This matrix flips the x, y, and z axis, scales to meters, and offsets the hands by -8cm.
-  vr: true//,
+  vr: true,
 
   // This causes the camera's matrix transforms (position, rotation, scale) to be applied to the hands themselves
   // The parent of the bones remain the scene, allowing the data to remain in easy-to-work-with world space.
   // (As the hands will usually interact with multiple objects in the scene.)
-  // effectiveParent: camera
+  effectiveParent: camera
 
 });
 
@@ -67,9 +67,9 @@ Leap.loopController.use('boneHand', {
   // If you already have a scene or want to create it yourself, you can pass it in here
   // Alternatively, you can pass it in whenever you want by doing
   // Leap.loopController.plugins.boneHand.scene = myScene.
-  // scene: scene,
+  scene: scene,
 
-  targetEl: document.body,
+  // targetEl: document.body,
 
   // Display the arm
   arm: true
@@ -84,13 +84,13 @@ Leap.loopController.loopWhileDisconnected = true;
 //
 //
 
-var boneHand = Leap.loopController.plugins.boneHand,
-    transform = Leap.loopController.plugins.transform,
+var boneHand = Leap.loopController.plugins.boneHand;
+    /*transform = Leap.loopController.plugins.transform,
     renderer = boneHand.renderer,
     scene = boneHand.scene,
-    camera = boneHand.camera;
-console.log(boneHand);
-transform.effectiveParent = camera;
+    camera = boneHand.camera;*/
+// console.log(boneHand);
+// transform.effectiveParent = camera;
 
 // Moves (translates and rotates) the camera
 var vrControls = new THREE.VRControls(camera, function(message){
@@ -124,7 +124,7 @@ var sphere = new THREE.Mesh(
 sphere.position.set(0, -0.1, -0.39);
 // spheres.push(sphere);
 scene.add(sphere);
-sphere.visible = false;
+sphere.visible = true;
 
 sphere.lastPosition = sphere.position.clone();
 sphere.pinched = false;
