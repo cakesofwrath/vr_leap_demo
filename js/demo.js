@@ -124,7 +124,7 @@ var sphere = new THREE.Mesh(
 sphere.position.set(0, -0.1, -0.39);
 // spheres.push(sphere);
 scene.add(sphere);
-/*sphere.visible = true;
+sphere.visible = true;
 
 sphere.lastPosition = sphere.position.clone();
 sphere.pinched = false;
@@ -134,7 +134,7 @@ Leap.loopController.on("frame", function(frame) {
     var hand = frame.hands[0];
 
     if(!hand) return;
-}).on("pinch", function(hand) {
+}).on("pinch", function(hfand) {
     sphere.visible = true;
     sphere.pinched = true;
     hand.data("sphere", sphere);
@@ -157,7 +157,7 @@ Leap.loopController.on("frame", function(frame) {
     sphere.pinched = false;
     sphere.lastPosition = sphere.position.clone();
     sphere.position.fromArray(hand.palmPosition);;
-});*/
+});
 
 var render = function() {
     if(!sphere.pinched) {
