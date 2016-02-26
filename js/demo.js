@@ -38,13 +38,15 @@ onResize = function() {
 };
 window.addEventListener("resize", onResize, false);
 
-/*var geometry = new THREE.BoxGeometry(2, 8, 2);
+
+
+var geometry = new THREE.BoxGeometry(2, 2, 2);
 var material = new THREE.MeshBasicMaterial({color: 0x00ff00})
 var cube = new THREE.Mesh(geometry, material);
 cube.position.set(-5, 0, 0);
-scene.add(cube);*/
+scene.add(cube);
 
-camera.position.z = 5;
+// camera.position.z = 5;
 // Connect to localhost and start getting frames
 Leap.loop();
 
@@ -104,7 +106,8 @@ var vrEffect = new THREE.VREffect(renderer, function(message){
 
 var onkey = function(event) {
   if (event.key === 'z' || event.keyCode === 122) {
-    vrControls.zeroSensor();
+    console.log('z');
+    vrControls.resetSensor();
   }
   if (event.key === 'f' || event.keyCode === 102) {
     console.log('f');
@@ -112,10 +115,16 @@ var onkey = function(event) {
   }
 };
 
+window.addEventListener("dblclick", function(){
+  // TODO: add a toggleFullScreen method to VREffect
+  var isFullscreen = document.mozFullScreenElement || document.webkitFullscreenElement;
+  vrEffect.setFullScreen(!isFullscreen);
+});
+
 window.addEventListener("keypress", onkey, true);
 
-var sphere = new THREE.Mesh(
-    new THREE.SphereGeometry(0.09, 20, 20),
+/*var sphere = new THREE.Mesh(
+    new THREE.SphereGeometry(0.03, 20, 20),
     new THREE.MeshPhongMaterial({
         color: 0xe6e6e6,
         specular: 0xe6e6e6
@@ -128,13 +137,13 @@ sphere.visible = true;
 
 sphere.lastPosition = sphere.position.clone();
 sphere.pinched = false;
-sphere.tmpPosition = new THREE.Vector3;
+sphere.tmpPosition = new THREE.Vector3;*/
 
 Leap.loopController.on("frame", function(frame) {
     var hand = frame.hands[0];
 
     if(!hand) return;
-}).on("pinch", function(hfand) {
+})/*.on("pinch", function(hand) {
     sphere.visible = true;
     sphere.pinched = true;
     hand.data("sphere", sphere);
@@ -157,10 +166,10 @@ Leap.loopController.on("frame", function(frame) {
     sphere.pinched = false;
     sphere.lastPosition = sphere.position.clone();
     sphere.position.fromArray(hand.palmPosition);;
-});
+});*/
 
 var render = function() {
-    if(!sphere.pinched) {
+    /*if(!sphere.pinched) {
         var newPos = (new THREE.Vector3).subVectors(sphere.position, sphere.lastPosition);
 
         newPos.multiplyScalar(0.96);
@@ -170,7 +179,7 @@ var render = function() {
 
         sphere.lastPosition = sphere.position.clone();
         sphere.position.copy(newPos);
-    }
+    }*/
 
     vrControls.update();
     vrEffect.render(scene, camera);
